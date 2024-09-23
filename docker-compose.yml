@@ -1,0 +1,43 @@
+version: '3.4'
+
+services:
+  seminarparticipants.api:
+    image: ${DOCKER_REGISTRY-}seminarparticipantsapi
+    build:
+      context: .
+      dockerfile: SeminarParticipants.Api/Dockerfile
+    ports:
+      - "7075:7075"
+    environment:
+      - ASPNETCORE_URLS=http://*:7075
+    depends_on: [mssql, seq_logs]
+
+  seminarparticipants.mvc:
+    image: ${DOCKER_REGISTRY-}seminarparticipantsmvc
+    build:
+      context: .
+      dockerfile: SeminarParticipants.MVC/Dockerfile
+    ports:
+      - "7078:7078"
+    environment:
+      - ASPNETCORE_URLS=http://*:7078
+    depends_on:
+      - seminarparticipants.api
+  mssql:
+    image: "mcr.microsoft.com/mssql/server"
+    container_name: compose_thirsty_faraday
+    hostname: mssql
+    environment:
+      - SA_PASSWORD=p@ssw0rd
+      - ACCEPT_EULA_Y
+    restart: unless-stopped
+    ports:
+      - "1401:1433"
+  seq_logs:
+    image: datalust/seq
+    restart: unless-stopped
+    ports:
+      - "5342:80"
+    environment:
+      - ACCEPT_EULA=Y
+
