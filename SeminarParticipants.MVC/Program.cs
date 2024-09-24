@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.HttpOverrides;
 using SeminarParticipants.MVC.Services.Base;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped(sp => new HttpClient
 {
-    BaseAddress = new Uri("http://seminarparticipants.api:7075")
+    BaseAddress = new Uri("https://api.seminarparticipants.com:44391")
 });
 builder.Services.AddScoped<IClient, Client>();
 
@@ -22,6 +23,12 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
+
 app.UseStaticFiles();
 
 app.UseRouting();

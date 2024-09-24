@@ -11,7 +11,8 @@ services:
     environment:
       - ASPNETCORE_URLS=http://*:7075
     depends_on: [mssql, seq_logs]
-
+    networks:
+      - app-network
   seminarparticipants.mvc:
     image: ${DOCKER_REGISTRY-}seminarparticipantsmvc
     build:
@@ -23,16 +24,20 @@ services:
       - ASPNETCORE_URLS=http://*:7078
     depends_on:
       - seminarparticipants.api
+    networks:
+      - app-network
   mssql:
     image: "mcr.microsoft.com/mssql/server"
     container_name: compose_thirsty_faraday
     hostname: mssql
     environment:
       - SA_PASSWORD=p@ssw0rd
-      - ACCEPT_EULA_Y
+      - ACCEPT_EULA=Y
     restart: unless-stopped
     ports:
-      - "1401:1433"
+      - "1401:1433" 
+    networks:
+      - app-network
   seq_logs:
     image: datalust/seq
     restart: unless-stopped
@@ -40,4 +45,22 @@ services:
       - "5342:80"
     environment:
       - ACCEPT_EULA=Y
+    networks:
+      - app-network
+  nginx:
+    build:
+      context: . 
+      dockerfile: nginx/Dockerfile
+    ports:
+      - "44391:44391"
+    depends_on:
+      - seminarparticipants.mvc
+    networks:
+      app-network:
+        aliases:
+          - "seminarparticipants.com"
+          - "api.seminarparticipants.com"
 
+networks:
+  app-network:
+    driver: bridge
