@@ -8,7 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SeminarParticipantsDatabaseConnection"));
+    options.UseSqlServer(builder.Configuration
+        .GetConnectionString("SeminarParticipantsDatabaseConnection"));
 });
 
 builder.Host.UseSerilog((context, configuration) =>
