@@ -11,16 +11,22 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nginx", "nginx", "{286C029E-62F9-43A0-A7EF-59FE8CBF251F}"
 	ProjectSection(SolutionItems) = preProject
+		nginx\api-cert.conf = nginx\api-cert.conf
 		nginx\api-cert.crt = nginx\api-cert.crt
 		nginx\api-cert.key = nginx\api-cert.key
 		nginx\api-cert.pfx = nginx\api-cert.pfx
 		nginx\Dockerfile = nginx\Dockerfile
-		nginx\api-cert.conf = nginx\api-cert.conf
 		nginx\mvc-cert.conf = nginx\mvc-cert.conf
 		nginx\mvc-cert.crt = nginx\mvc-cert.crt
 		nginx\mvc-cert.key = nginx\mvc-cert.key
 		nginx\mvc-cert.pfx = nginx\mvc-cert.pfx
 		nginx\nginx.conf = nginx\nginx.conf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{C3E57940-756C-4461-A3A8-885F79800374}"
+	ProjectSection(SolutionItems) = preProject
+		k8s\admin-user-cluster-role.yml = k8s\admin-user-cluster-role.yml
+		k8s\admin-user.yml = k8s\admin-user.yml
 	EndProjectSection
 EndProject
 Global
