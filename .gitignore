@@ -362,6 +362,8 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-# nginx
+# nginx config
 nginx/
 
+# k8s config
+k8s/

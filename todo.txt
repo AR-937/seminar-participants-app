@@ -1,1 +1,0 @@
-//add config for sql server in k8s
