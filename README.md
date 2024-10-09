@@ -1,4 +1,4 @@
-# SeminarParticipants
+# Seminar Participants
 
 This repository contains a cloud-native solution with a **.NET MVC client**, a **.NET API**, and **MS SQL Server** as the database. The application is containerized using **Docker** and deployed using **Kubernetes**, adhering to cloud-native principles for scalability and high availability.
 
