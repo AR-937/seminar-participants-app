@@ -1,6 +1,6 @@
 # Seminar Participants
 
-The **Seminar Participants** app is designed to manage seminar registrations and participant information efficiently. Built as a scalable and resilient cloud-native application, it consists of a **.NET MVC client**, a **.NET API**, and **MS SQL Server** as the database. The application is containerized using **Docker** and deployed using **Kubernetes**, adhering to cloud-native principles for scalability and high availability.
+The **Seminar Participants** app efficiently manages seminar registrations and participant information. Designed as a scalable and resilient cloud-native application, it consists of a **.NET MVC client**, a **.NET API**, and utilizes **MS SQL Server** as its database. Containerization is achieved using **Docker**, and deployment is handled with **Kubernetes**, ensuring adherence to cloud-native principles that enhance scalability, high availability, and security.
 
 ## Features
 
