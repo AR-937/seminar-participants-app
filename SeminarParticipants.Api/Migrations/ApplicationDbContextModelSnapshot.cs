@@ -22,7 +22,7 @@ namespace SeminarParticipants.Api.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ConferenceAttendees.Api.Data.Attendee", b =>
+            modelBuilder.Entity("SeminarParticipants.Api.Data.Attendee", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -73,7 +73,7 @@ namespace SeminarParticipants.Api.Migrations
                     b.ToTable("Attendees");
                 });
 
-            modelBuilder.Entity("ConferenceAttendees.Api.Data.Gender", b =>
+            modelBuilder.Entity("SeminarParticipants.Api.Data.Gender", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -101,7 +101,7 @@ namespace SeminarParticipants.Api.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ConferenceAttendees.Api.Data.JobRole", b =>
+            modelBuilder.Entity("SeminarParticipants.Api.Data.JobRole", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -139,7 +139,7 @@ namespace SeminarParticipants.Api.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ConferenceAttendees.Api.Data.ReferralSource", b =>
+            modelBuilder.Entity("SeminarParticipants.Api.Data.ReferralSource", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -177,21 +177,21 @@ namespace SeminarParticipants.Api.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ConferenceAttendees.Api.Data.Attendee", b =>
+            modelBuilder.Entity("SeminarParticipants.Api.Data.Attendee", b =>
                 {
-                    b.HasOne("ConferenceAttendees.Api.Data.Gender", "Gender")
+                    b.HasOne("SeminarParticipants.Api.Data.Gender", "Gender")
                         .WithMany()
                         .HasForeignKey("GenderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ConferenceAttendees.Api.Data.JobRole", "JobRole")
+                    b.HasOne("SeminarParticipants.Api.Data.JobRole", "JobRole")
                         .WithMany()
                         .HasForeignKey("JobRoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ConferenceAttendees.Api.Data.ReferralSource", "ReferralSource")
+                    b.HasOne("SeminarParticipants.Api.Data.ReferralSource", "ReferralSource")
                         .WithMany()
                         .HasForeignKey("ReferralSourceId")
                         .OnDelete(DeleteBehavior.Cascade)
