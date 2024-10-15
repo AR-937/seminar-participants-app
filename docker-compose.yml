@@ -1,5 +1,4 @@
 
-
 services:
   seminarparticipants.api:
     image: ${DOCKER_REGISTRY-}seminarparticipantsapi
@@ -7,7 +6,7 @@ services:
       context: .
       dockerfile: SeminarParticipants.Api/Dockerfile
     ports:
-      - "7075:7075" 
+      - "7075:7075"      
     depends_on: [mssql, seq_logs]
     networks:
       - app-network
@@ -24,14 +23,22 @@ services:
       - app-network
   mssql:
     image: "axxr/seminarparticipantsdb"
-    container_name: participants_container
+    container_name: mssql_dc
     hostname: mssql
-    environment:
-      - SA_PASSWORD=p@ssw0rd
+    environment: 
+      - MSSQL_SA_PASSWORD=p@ssw0rd
       - ACCEPT_EULA=Y
+      - MSSQL_DATA_DIR=/var/opt/sqlserver/data
+      - MSSQL_LOG_DIR=/var/opt/sqlserver/log
+      - MSSQL_BACKUP_DIR=/var/opt/sqlserver/backup
     restart: unless-stopped
     ports:
       - "1401:1433" 
+    volumes: 
+          - sqlsystem:/var/opt/mssql/
+          - sqldata:/var/opt/sqlserver/data
+          - sqllog:/var/opt/sqlserver/log
+          - sqlbackup:/var/opt/sqlserver/backup
     networks:
       - app-network
   seq_logs:
@@ -56,7 +63,14 @@ services:
         aliases:
           - "seminarparticipants.com"
           - "api.seminarparticipants.com"
+    restart: always
 
 networks:
   app-network:
     driver: bridge
+
+volumes:
+  sqlsystem:
+  sqldata:
+  sqllog:
+  sqlbackup:
